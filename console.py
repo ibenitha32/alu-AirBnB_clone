@@ -13,6 +13,7 @@ from models.amenity import Amenity
 from models.review import Review
 
 
+# Function to parse the input arguments
 def parse(arg):
     curly_braces = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
@@ -31,6 +32,7 @@ def parse(arg):
         return retl
 
 
+# Define the HBnB command interpreter class
 class HBNBCommand(cmd.Cmd):
     """Defines the HBnB command interpreter.
 
@@ -50,7 +52,7 @@ class HBNBCommand(cmd.Cmd):
     }
 
     def emptyline(self):
-        """Do nothing upon receiving an empty line."""
+        """Does nothing upon receiving an empty line."""
         pass
 
     def default(self, arg):
