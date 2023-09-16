@@ -89,8 +89,9 @@ class HBNBCommand(cmd.Cmd):
         based or not on the class name
         """
         args = shlex.split(arg)
+        objects = models.storage.all().values()
         if not arg:
-            print([str(value) for value in models.storage.all().values()])
+            print([str(value) for value in objects])
         elif args[0] not in models.classes:
             print("** class doesn't exist **")
         else:
@@ -104,8 +105,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         """
-        Updates an instance based on the class name and id
-        by adding or updating attribute
+        Updates an instance based on the class name and id by adding or
+        updating attribute and save it to the JSON file.
         """
         args = shlex.split(arg)
         if not arg:
@@ -123,8 +124,15 @@ class HBNBCommand(cmd.Cmd):
             if key not in models.storage.all():
                 print("** no instance found **")
             else:
-                setattr(models.storage.all()[key], args[2], args[3])
-                models.storage.save()
+                obj = models.storage.all()[key]
+                if hasattr(obj, args[2]):
+                    value = args[3]
+                    if value[0] == '"' and value[-1] == '"':
+                        value = value[1:-1]
+                    setattr(obj, args[2], type(getattr(obj, args[2]))(value))
+                    models.storage.save()
+                else:
+                    print("** attribute doesn't exist **")
 
 
 if __name__ == "__main__":
@@ -132,3 +140,4 @@ if __name__ == "__main__":
     Main function
     """
     HBNBCommand().cmdloop()
+
