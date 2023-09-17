@@ -3,9 +3,11 @@
 from models.base_model import BaseModel
 
 class Place(BaseModel):
+    
     """
     Defines place class that inherits from BaseModel.
-    The place class represents any place in the AirBnB app and contains various attributes.
+    The place class represents any place in the AirBnB 
+    app and contains various attributes.
 
     Attributes:
         city_id (str): The City id.
