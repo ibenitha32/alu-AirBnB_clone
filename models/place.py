@@ -1,14 +1,10 @@
 #!/usr/bin/python3
-
+"""Defines the Place class."""
 from models.base_model import BaseModel
 
-class Place(BaseModel):
-    
-    """
-    Defines place class that inherits from BaseModel.
-    The place class represents any place in the AirBnB 
-    app and contains various attributes.
 
+class Place(BaseModel):
+    """Represent a place.
     Attributes:
         city_id (str): The City id.
         user_id (str): The User id.
@@ -22,6 +18,7 @@ class Place(BaseModel):
         longitude (float): The longitude of the place.
         amenity_ids (list): A list of Amenity ids.
     """
+
     city_id = ""
     user_id = ""
     name = ""
